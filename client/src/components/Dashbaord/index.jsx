@@ -8,9 +8,10 @@ export default function Dashboard() {
    const [startDate, setStartDate] = useState('');
    const [endDate, setEndDate] = useState('');
 
+   const BASE_URL = import.meta.env.VITE_API_URL;
    const handleGet = async () => {
        try {
-           const response = await axios.get('http://localhost:5000/expense', {
+           const response = await axios.get(`${BASE_URL}/expense`, {
                params: {
                    startDate,
                    endDate
@@ -21,8 +22,8 @@ export default function Dashboard() {
            console.error(err);
        }
        try {
-        const response = await axios.get('http://localhost:5000/income', {
-            params: {
+        const response = await axios.get(`${BASE_URL}/income`, {
+          params: {
                 startDate,
                 endDate
             }

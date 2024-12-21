@@ -1,7 +1,8 @@
 'use server';
 
 export async function addIncomeAction(incomeData) {
-    const response = await fetch('http://localhost:5000/income', {
+    const BASE_URL = import.meta.env.VITE_API_URL;
+    const response = await fetch(`${BASE_URL}/income`, {           
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

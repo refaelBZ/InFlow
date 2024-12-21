@@ -3,7 +3,6 @@ import styles from './style.module.scss';
 import { addExpenseAction } from '../../hooks/addExpenseAction';
 import { addIncomeAction } from '../../hooks/addIncomeAction';
 import { useFormStatus } from 'react-dom';
-import { useActionState } from 'react';
 
 // Submit button component with loading state
 function SubmitButton() {
@@ -18,19 +17,23 @@ function SubmitButton() {
 
 
 export default function Form() {
-
   const [type, setType] = useState("income");
-  
-  const [actionHandler] = useActionState(async (prevState, formData) => {
 
+  async function formAction(formData) {
     const data = {
       amount: parseFloat(formData.get('amount')),
       date: new Date(formData.get('date')).toISOString(),
       customer: formData.get('customer'),
-      productType: formData.get('productType'),
+      productType: formData.get('productType') 
+
     };
-    return type === 'income' ? await addIncomeAction(data) : await addExpenseAction(data);
-  });
+
+    if (type === "income") {
+      return await addIncomeAction(data);
+    } else {
+      return await addExpenseAction(data);
+    }
+  }
 
  return (
 <div className={styles.formContainer}>
@@ -48,7 +51,7 @@ export default function Form() {
       </div>
     </label>
   </div>
-<form action={actionHandler} className={styles.form}>
+      <form action={formAction} className={styles.form}>
         <input
           type="number"
           name="amount"
