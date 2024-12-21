@@ -1,4 +1,4 @@
-import Dashboard from '../dashbaord';
+import Dashboard from '../dashboard';
 import Form from '../Form';
 import styles from './style.module.scss';
 
