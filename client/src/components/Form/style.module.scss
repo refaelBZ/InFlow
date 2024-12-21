@@ -1,0 +1,168 @@
+@use 'sass:color';
+@import '../../index.scss';
+
+.formContainer {
+  padding: $spacing-unit * 1.5;
+  
+  .formTitle {
+    font-size: 1.25rem;
+    color: $text-primary;
+    margin-bottom: $spacing-unit * 1.5;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .switcherContainer {
+    margin-bottom: $spacing-unit * 1.5;
+    display: flex;
+    justify-content: center;
+
+    .switcher {
+      position: relative;
+      background-color: $gray-light;
+      border-radius: $border-radius;
+      padding: 0.25rem;
+      display: inline-flex;
+      width: 200px; // שינוי מ-min-width ל-width קבוע
+      cursor: pointer;
+
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        position: absolute;
+      }
+
+      .switchLabels {
+        display: flex;
+        width: 100%;
+        position: relative;
+
+        span {
+          flex: 1;
+          text-align: center;
+          padding: 0.5rem 1rem;
+          z-index: 1;
+          color: $text-secondary;
+          transition: color $transition-duration ease;
+          font-size: 0.875rem;
+          user-select: none;
+
+          &.active {
+            color: $pink-dark;
+          }
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0; // נוסף בגלל ה-RTL
+          height: 100%;
+          width: 50%;
+          background-color: $pink-light;
+          border-radius: calc($border-radius - 0.125rem); // מתאים את הרדיוס לפדינג
+          transition: transform $transition-duration ease;
+          transform: translateX(0);
+        }
+
+        &.expense:before {
+          transform: translateX(-100%); // שינוי מ-100% ל--100% בגלל ה-RTL
+        }
+      }
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-unit;
+
+    .select {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        font-size: 0.875rem;
+        background-color: $white;
+        cursor: pointer;
+        
+        &:focus {
+          outline: none;
+          border-color: $pink-light;
+        }    
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      
+      &:focus {
+        outline: none;
+        border-color: $pink-light;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      background-color: $pink-light;
+      color: $pink-dark;
+      border-radius: $border-radius;
+      transition: all $transition-duration ease;
+
+      &:hover {
+        background-color: rgba($pink-light, 0.8); // שיניתי את זה מ-color.adjust
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    padding: $spacing-unit;
+
+    .formTitle {
+      font-size: 1.125rem;
+      margin-bottom: $spacing-unit;
+    }
+
+    .switcherContainer {
+      margin-bottom: $spacing-unit;
+
+      .switcher {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+
+    .form {
+      input, 
+      select, 
+      button {
+        padding: 0.875rem;
+        font-size: 16px;
+        height: 3rem;
+      }
+
+      button {
+        height: 3.25rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .formContainer {
+    .form {
+      gap: $spacing-unit * 0.75;
+    }
+  }
+}
