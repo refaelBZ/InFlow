@@ -1,6 +1,61 @@
-.item{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
-}
+@import '../../index.scss';
+
+.item {
+    @include flex-between;
+    padding: $spacing-unit;
+    border-bottom: 1px solid $border-color;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+   
+    .details {
+      display: flex;
+      gap: $spacing-unit;
+      align-items: center;
+      
+      .customer {
+        font-weight: $font-weight-bold;
+        color: $text-primary;
+      }
+      
+      .product {
+        color: $text-secondary;
+      }
+      
+      .amount {
+        color: $pink-dark;
+        font-weight: $font-weight-bold;
+      }
+   
+      .date {
+        color: $text-secondary;
+        font-size: $font-size-small;
+      }
+    }
+   
+    .actions {
+      display: flex;
+      gap: $spacing-unit * 0.5;
+      
+      button {
+        padding: 0.5rem;
+        border-radius: $border-radius;
+        transition: all $transition-duration;
+        
+        &.edit {
+          color: $text-secondary;
+          &:hover {
+            background-color: $gray-light;
+          }
+        }
+        
+        &.delete {
+          color: #ef4444;
+          &:hover {
+            background-color: #fee2e2;
+          }
+        }
+      }
+    }
+   }

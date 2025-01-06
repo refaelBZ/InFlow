@@ -32,7 +32,7 @@ export default function ExpensesList() {
 
 
   return (
-    <div>
+    <div className={styles.expensesContainer}>  {/* אפשר להשתמש באותו class */}
       <DatePicker
         startDate={startDate}
         setStartDate={setStartDate}
@@ -41,11 +41,20 @@ export default function ExpensesList() {
         handleGet={handleGetExpenses}
         isLoading={isLoading}
       />
-      <ul>
-        {expenses.map(expense => (
-          <TransactionItem key={expense._id} type="expense" amount={expense.amount} date={expense.date} customer={expense.customer} product={expense.product} />
-        ))}
-      </ul>
+      <div className={styles.listWrapper}>
+        <ul className={styles.list}>
+          {expenses.map(expense => (
+            <TransactionItem
+              key={expense._id}
+              type="expense"
+              amount={expense.amount}
+              date={expense.date} 
+              customer={expense.customer}
+              product={expense.product}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
-  )
+   )
 }

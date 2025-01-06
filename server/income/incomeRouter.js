@@ -22,5 +22,15 @@ router.get('/income', async (req, res) => {
     }
 });
 
+router.get('/incomes', async (req, res) => {
+    try {
+        const { startDate, endDate } = req.query;
+        const incomes = await incomeService.getAllIncomes(startDate, endDate);
+        res.status(200).json(incomes);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
 
 module.exports = router;

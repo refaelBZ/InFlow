@@ -1,0 +1,17 @@
+@import '../../index.scss';
+
+.expensesContainer {
+    padding: $spacing-unit * 1.5;
+    
+    .listWrapper {
+      margin-top: $spacing-unit;
+      background-color: $white;
+      border-radius: $border-radius;
+      box-shadow: $shadow-sm;
+      
+      .list {
+        list-style: none;
+        padding: 0;
+      }
+    }
+   }
