@@ -80,6 +80,8 @@ export default function Form() {
           <option value="general">כללי</option>
           <option value="custom_cake">עוגה מעוצבת</option>
           <option value="bento_cake">עוגת בנטו</option>
+          <option value="bento_cake_12">עוגת בנטו 12</option>
+          <option value="box_cake">עוגת גן</option>
           <option value="package">מארז</option>
           <option value="workshop">סדנה</option>
         </select>:""

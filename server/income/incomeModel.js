@@ -7,7 +7,7 @@ const incomeSchema = new mongoose.Schema({
     productType: { 
         type: String, 
         required: true,
-        enum: ['general', 'custom_cake', 'bento_cake', 'package', 'workshop'],
+        enum: ['general', 'custom_cake', 'bento_cake_12', 'bento_cake', 'package', 'workshop', "box_cake"],
         default: 'general'
     }
 });
