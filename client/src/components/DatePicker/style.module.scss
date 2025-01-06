@@ -1,0 +1,52 @@
+@import '../../index.scss';
+
+.headerControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: $spacing-unit * 2;
+
+    .dateGroup {
+      display: flex;
+      align-items: center;
+      gap: $spacing-unit * 1.5;  // מרווח גדול יותר בין הקבוצות
+
+      .dateControl {
+        display: flex;
+        align-items: center;
+        gap: $spacing-unit * 0.75;  // מרווח בין התווית לקלט
+
+        label {
+          font-size: 0.875rem;
+          color: $text-secondary;
+          white-space: nowrap;  // מונע שבירת שורה של התווית
+        }
+
+        input {
+          padding: 0.5rem 0.75rem;
+          border: 1px solid $border-color;
+          border-radius: $border-radius;
+          font-size: 0.875rem;
+          
+          &:focus {
+            outline: none;
+            border-color: $pink-light;
+          }
+        }
+      }
+    }
+
+    .fetchButton {
+      padding: 0.5rem 1.5rem;
+      background-color: $pink-light;
+      color: $pink-dark;
+      border-radius: $border-radius;
+      transition: background-color $transition-duration ease;
+      margin-right: $spacing-unit;  // מרווח מהאלמנט הקודם
+      white-space: nowrap;  // מונע שבירת שורה של הטקסט
+
+      &:hover {
+        background-color: rgba($pink-light, 0.8);
+      }
+    }
+  }

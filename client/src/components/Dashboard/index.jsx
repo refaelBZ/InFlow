@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import DatePicker from '../DatePicker';
 
 export default function Dashboard() {
   const [totalExpenses, setTotalExpenses] = useState(0);
@@ -14,7 +16,7 @@ export default function Dashboard() {
   const handleGet = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`${BASE_URL}/expense`, {
+      const response = await axios.get(`${BASE_URL}/totalexpense`, {
         params: {
           startDate,
           endDate
@@ -66,61 +68,48 @@ export default function Dashboard() {
 
   return (
     <div className={styles.dashboardContainer}>
-      <div className={styles.headerControls}>
-        <div className={styles.dateGroup}>
-          <div className={styles.dateControl}>
-            <label>מתאריך:</label>
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
+      <DatePicker
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+        handleGet={handleGet}
+        isLoading={isLoading}
+      />
+      <div className={styles.statsGrid}>
+        <NavLink to="/expenses" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
+          <div className={styles.statCard}>
+            <h3 className={styles.statTitle}>הכנסות</h3>
+            <p className={styles.statValue}>
+              {isLoading ? (
+                <div className={styles.loader} />
+              ) : (
+                `₪ ${totalIncome.toLocaleString()}`
+              )}
+            </p>
           </div>
-          <div className={styles.dateControl}>
-            <label>עד תאריך:</label>
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </div>
-          <button onClick={handleGet} className={styles.fetchButton}>
-           {isLoading? "טוען...": "הצג"}
-          </button>
+        </NavLink>
+        <div className={styles.statCard}>
+          <h3 className={styles.statTitle}>הוצאות</h3>
+          <p className={styles.statValue}>
+            {isLoading ? (
+              <div className={styles.loader} />
+            ) : (
+              `₪ ${totalExpenses.toLocaleString()}`
+            )}
+          </p>
+        </div>
+        <div className={styles.statCard}>
+          <h3 className={styles.statTitle}>רווח</h3>
+          <p className={styles.statValue}>
+            {isLoading ? (
+              <div className={styles.loader} />
+            ) : (
+              `₪ ${profit.toLocaleString()}`
+            )}
+          </p>
         </div>
       </div>
-      <div className={styles.statsGrid}>
-  <div className={styles.statCard}>
-    <h3 className={styles.statTitle}>הכנסות</h3>
-    <p className={styles.statValue}>
-      {isLoading ? (
-        <div className={styles.loader} />
-      ) : (
-        `₪ ${totalIncome.toLocaleString()}`
-      )}
-    </p>
-  </div>
-  <div className={styles.statCard}>
-    <h3 className={styles.statTitle}>הוצאות</h3>
-    <p className={styles.statValue}>
-      {isLoading ? (
-        <div className={styles.loader} />
-      ) : (
-        `₪ ${totalExpenses.toLocaleString()}`
-      )}
-    </p>
-  </div>
-  <div className={styles.statCard}>
-    <h3 className={styles.statTitle}>רווח</h3>
-    <p className={styles.statValue}>
-      {isLoading ? (
-        <div className={styles.loader} />
-      ) : (
-        `₪ ${profit.toLocaleString()}`
-      )}
-    </p>
-  </div>
-</div>
     </div>
   );
 }

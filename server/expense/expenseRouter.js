@@ -14,10 +14,22 @@ console.log("router", expense);
 });
 
 
-router.get('/expense', async (req, res) => {
+router.get('/totalexpense', async (req, res) => {
     try {
         const { startDate, endDate } = req.query;
         const expenses = await expenseService.getExpenses(startDate, endDate);
+        res.status(200).json(expenses);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+
+router.get('/expenses', async (req, res) => {
+
+    try {
+        const { startDate, endDate } = req.query;
+        const expenses = await expenseService.getAllExpenses(startDate, endDate);
         res.status(200).json(expenses);
     } catch (err) {
         res.status(400).json({ error: err.message });
