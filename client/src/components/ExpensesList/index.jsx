@@ -8,11 +8,37 @@ import DatePicker from '../DatePicker';
 
 export default function ExpensesList() {
   const [expenses, setExpenses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const BASE_URL = import.meta.env.VITE_API_URL;
+
+
+    const calculateCurrentMonthRange = () => {
+      const now = new Date();
+      const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  
+      const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
+  
+      return {
+        startDate: formatDate(firstDay),
+        endDate: formatDate(lastDay)
+      };
+    };
+  
+    useEffect(() => {
+      const { startDate, endDate } = calculateCurrentMonthRange();
+      setStartDate(startDate);
+      setEndDate(endDate);
+    }, []);
+    
 
   const handleGetExpenses = async () => {
     setIsLoading(true);
@@ -32,7 +58,7 @@ export default function ExpensesList() {
 
 
   return (
-    <div>
+    <div className={styles.expensesContainer}>  {/* אפשר להשתמש באותו class */}
       <DatePicker
         startDate={startDate}
         setStartDate={setStartDate}
@@ -41,11 +67,22 @@ export default function ExpensesList() {
         handleGet={handleGetExpenses}
         isLoading={isLoading}
       />
-      <ul>
-        {expenses.map(expense => (
-          <TransactionItem key={expense._id} type="expense" amount={expense.amount} date={expense.date} customer={expense.customer} product={expense.product} />
-        ))}
-      </ul>
+      <div className={styles.listWrapper}>
+        <ul className={styles.list}>
+          {expenses.map(expense => (
+            <TransactionItem
+              id={expense._id}
+              key={expense._id}
+              type="expense"
+              amount={expense.amount}
+              date={expense.date} 
+              customer={expense.customer}
+              product={expense.product}
+              setExpenses={setExpenses}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
-  )
+   )
 }

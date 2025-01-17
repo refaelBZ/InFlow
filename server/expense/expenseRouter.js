@@ -36,4 +36,19 @@ router.get('/expenses', async (req, res) => {
     }
 });
 
+router.put('/expenses/:id', async (req, res) => {
+    try {
+        const deletedExpense = await expenseService.deleteExpense(req.params.id);
+        if (!deletedExpense) {
+            return res.status(404).json({ error: "Expense not found" });
+        }
+
+        res.status(200).json({ message: "Expense deleted successfully", expense: deletedExpense });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+
+
 module.exports = router;

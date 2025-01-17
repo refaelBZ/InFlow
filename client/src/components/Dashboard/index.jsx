@@ -3,6 +3,7 @@ import styles from './style.module.scss';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import DatePicker from '../DatePicker';
+import Header from '../Header';
 
 export default function Dashboard() {
   const [totalExpenses, setTotalExpenses] = useState(0);
@@ -77,7 +78,7 @@ export default function Dashboard() {
         isLoading={isLoading}
       />
       <div className={styles.statsGrid}>
-        <NavLink to="/expenses" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
+        <NavLink to="/incomes" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
           <div className={styles.statCard}>
             <h3 className={styles.statTitle}>הכנסות</h3>
             <p className={styles.statValue}>
@@ -89,6 +90,7 @@ export default function Dashboard() {
             </p>
           </div>
         </NavLink>
+        <NavLink to="/expenses" className={({ isActive }) => isActive ? styles.activeLink : styles.link}>
         <div className={styles.statCard}>
           <h3 className={styles.statTitle}>הוצאות</h3>
           <p className={styles.statValue}>
@@ -99,6 +101,8 @@ export default function Dashboard() {
             )}
           </p>
         </div>
+        </NavLink>
+
         <div className={styles.statCard}>
           <h3 className={styles.statTitle}>רווח</h3>
           <p className={styles.statValue}>

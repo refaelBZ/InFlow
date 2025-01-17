@@ -22,5 +22,29 @@ router.get('/income', async (req, res) => {
     }
 });
 
+router.get('/incomes', async (req, res) => {
+    try {
+        const { startDate, endDate } = req.query;
+        const incomes = await incomeService.getAllIncomes(startDate, endDate);
+        res.status(200).json(incomes);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+router.put('/incomes/:id', async (req, res) => {
+    try {
+        const deletedIncome = await incomeService.deleteIncome(req.params.id);
+        if (!deletedIncome) {
+            return res.status(404).json({ error: "Income not found" });
+        }
+
+        res.status(200).json({ message: "Income deleted successfully", income: deletedIncome });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+
 
 module.exports = router;

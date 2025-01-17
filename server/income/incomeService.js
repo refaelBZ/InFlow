@@ -12,6 +12,20 @@ const getIncomes = async (startDate, endDate) => {
     return totalIncomes;
 }
 
+const getAllIncomes= async (startDate, endDate) => {
+    
+    const incomes = await incomeController.getIncomes(startDate, endDate);
+    return incomes;
+}
+
+const deleteIncome = async (incomeID) => {
+    const income = await incomeController.deleteInc(incomeID);
+    return income;
+}
+
 module.exports = {
-    createIncome,getIncomes
+    createIncome,
+    getIncomes,
+    getAllIncomes,
+    deleteIncome
 };
