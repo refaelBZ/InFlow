@@ -4,6 +4,7 @@ const incomeSchema = new mongoose.Schema({
     amount: { type: Number, required: true },
     date: { type: Date, required: true },
     customer: { type: String, required: true },
+    isDeleted: { type: Boolean, default: false },
     productType: { 
         type: String, 
         required: true,

@@ -21,6 +21,19 @@ const getAllExpenses = async (startDate, endDate) => {
     const expenses = await expenseController.getEx(startDate, endDate);
     return expenses;
 }
+
+
+const getOneExpense = async (expenseID) => {
+    const expense = await expenseController.getOne(expenseID);
+    return expense;
+}
+
+
+const deleteExpense = async (expenseID) => {
+    const expense = await expenseController.deleteEx(expenseID);
+    return expense;
+}
+
 module.exports = {
-    createExpense,getExpenses,getAllExpenses
+    createExpense,getExpenses,getAllExpenses,getOneExpense,deleteExpense
 };

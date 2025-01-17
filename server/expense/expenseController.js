@@ -18,11 +18,30 @@ const getEx = async function (startDate, endDate) {
         date: {
             $gte: start,
             $lte: end
-        }
+        },
+        isDeleted: false
     });
     return expenses;
 }
 
+const getOne = async function (expenseID) {
+    const expense = await Expense.findById(expenseID);
+    return expense;
+}
+
+const deleteEx = async (expenseID) => {
+    const expense = await Expense.findById(expenseID);
+    const isDeleted = expense.isDeleted;
+    
+    if (!expense || isDeleted) {
+        return null;
+    }
+    expense.isDeleted = true;
+    await expense.save();
+    return expense;
+};
+
+
 module.exports = {
-    addExpense,getEx
+    addExpense,getEx,getOne,deleteEx
 };

@@ -3,6 +3,7 @@ import styles from './style.module.scss';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import DatePicker from '../DatePicker';
+import Header from '../Header';
 
 export default function Dashboard() {
   const [totalExpenses, setTotalExpenses] = useState(0);
