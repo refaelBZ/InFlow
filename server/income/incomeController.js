@@ -1,5 +1,7 @@
 const Income = require('./incomeModel');
 
+
+//add new income
 async function addIncome(newIncome) {
     if (!newIncome.amount || !newIncome.date || !newIncome.customer) {
         throw new Error("שדות חובה חסרים: amount, date, customer");
@@ -7,6 +9,7 @@ async function addIncome(newIncome) {
     return await Income.create(newIncome);
 }
 
+//get all incomes between start date and end date
 const getIncomes = async function (startDate, endDate) {
     const start = new Date(startDate);
     start.setUTCHours(0, 0, 0, 0);
@@ -23,7 +26,7 @@ const getIncomes = async function (startDate, endDate) {
     });
     return incomes;
 }
-
+//delete income
 const deleteInc = async (incomeID) => {
     const income = await Income.findById(incomeID);
     if (!income) {
@@ -34,34 +37,4 @@ const deleteInc = async (incomeID) => {
     return income;
 };
 
-
-
-
-async function updateIncomeDocuments() {
-    try {
-       
-
-
-        // עדכון כל ההכנסות
-        const incomeResult = await Income.updateMany(
-            { isDeleted: { $exists: false } },
-            { $set: { isDeleted: false } }
-        );
-
-        console.log(`Updated ${incomeResult.modifiedCount} income documents`);
-        console.log('Update completed successfully');
-
-    } catch (error) {
-        console.error('Error updating income documents:', error);
-
-}
-}
-
-updateIncomeDocuments();
-
-
-module.exports = {
-    addIncome,
-    getIncomes,
-    deleteInc
-};
+module.exports = {addIncome, getIncomes, deleteInc};

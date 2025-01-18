@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const incomeService = require("./incomeService");
 
+
+//add a new income
 router.post('/income', async (req, res) => {
     try {
         const income = await incomeService.createIncome(req.body);
@@ -11,7 +13,7 @@ router.post('/income', async (req, res) => {
     }
 });
 
-
+//get total incomes
 router.get('/income', async (req, res) => {
     try {
         const { startDate, endDate } = req.query;
@@ -22,6 +24,7 @@ router.get('/income', async (req, res) => {
     }
 });
 
+//get list of the incomes
 router.get('/incomes', async (req, res) => {
     try {
         const { startDate, endDate } = req.query;
@@ -32,6 +35,7 @@ router.get('/incomes', async (req, res) => {
     }
 });
 
+//update the income as deleted from the incomes
 router.put('/incomes/:id', async (req, res) => {
     try {
         const deletedIncome = await incomeService.deleteIncome(req.params.id);
@@ -44,7 +48,5 @@ router.put('/incomes/:id', async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 });
-
-
 
 module.exports = router;
