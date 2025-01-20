@@ -59,6 +59,8 @@ export default function ExpensesList() {
 
   return (
     <div className={styles.expensesContainer}>  {/* אפשר להשתמש באותו class */}
+      <div className={styles.datePicker}>
+
       <DatePicker
         startDate={startDate}
         setStartDate={setStartDate}
@@ -67,6 +69,8 @@ export default function ExpensesList() {
         handleGet={handleGetExpenses}
         isLoading={isLoading}
       />
+            </div>
+
       <div className={styles.listWrapper}>
         <ul className={styles.list}>
           {expenses.map(expense => (

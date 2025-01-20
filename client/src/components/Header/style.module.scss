@@ -1,28 +1,37 @@
-// כללי
+@use 'sass:color';
+@import '../../index.scss';
 
-  // קישור כללי
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-unit;
+
   .link {
-    text-decoration: none; // ביטול קו תחתון
-    color: #555; // צבע טקסט
-    font-size: 18px; // גודל טקסט
-    font-weight: 500; // עובי טקסט
-    padding: 5px 10px; // ריווח פנימי בקישורים
-    transition: color 0.3s ease, background-color 0.3s ease; // אנימציה למעבר
+    text-decoration: none;
+    color: $text-secondary;
+    padding: $spacing-unit;
+    border-radius: $border-radius;
+    transition: all $transition-duration;
+    font-weight: $font-weight-normal;
+    
+    &:hover {
+      background-color: $gray-light;
+    }
   }
-  
-  // מצב של רחף
-  .link:hover {
-    color: #0078ff; // צבע טקסט במעבר
-    background-color: #e0f0ff; // רקע במעבר
-    border-radius: 5px; // פינות מעוגלות
-  }
-  
-  // קישור פעיל
+
   .active {
-    color: #fff; // צבע טקסט
-    background-color: #0078ff; // רקע פעיל
-    font-weight: 700; // עובי טקסט מודגש
-    padding: 5px 12px; // ריווח פנימי נוסף
-    border-radius: 5px; // פינות מעוגלות
+    @extend .link;
+    background-color: $pink-light;
+    color: $pink-dark;
+    font-weight: $font-weight-bold;
   }
-  
+}
+
+
+@media (max-width: 768px) {
+  .nav {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-unit;
+    }
+}

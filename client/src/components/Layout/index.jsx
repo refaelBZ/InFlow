@@ -11,17 +11,19 @@ export default function Layout() {
     <BrowserRouter>
       <div className={styles.container}>
         <div className={styles.wrapper}>
+          <div className={styles.navigation}>
+            <Header />
+          </div>
           <div className={styles.sidebar}>
             <Form />
           </div>
           <div className={styles.mainContent}>
-          <Header/>
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/expenses" element={<ExpensesList />} />
               <Route path="/incomes" element={<IncomesList />} />
-              <Route path ="/dashboard" element={<Dashboard />} />
-              </Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
           </div>
         </div>
       </div>
