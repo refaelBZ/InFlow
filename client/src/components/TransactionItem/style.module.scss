@@ -1,61 +1,136 @@
 @import '../../index.scss';
 
 .item {
-    @include flex-between;
-    padding: $spacing-unit;
-    border-bottom: 1px solid $border-color;
+  @include flex-between;
+  padding: $spacing-unit * 1.2;
+  background-color: $white;
+  border-bottom: 1px solid $border-color;
+  transition: all $transition-duration;
+  
+  &:hover {
+    background-color: $gray-light;
+  }
+ 
+  .details {
+    display: flex;
+    gap: $spacing-unit * 2;
+    align-items: center;
     
-    &:last-child {
-      border-bottom: none;
+    .mainInfo {
+      display: flex;
+      gap: $spacing-unit * 1.5;
+      align-items: center;
+ 
+      .amount {
+        font-size: $font-size-large;
+        font-weight: $font-weight-bold;
+        min-width: 120px;
+      }
+ 
+      .product {
+        color: $text-secondary;
+        font-weight: $font-weight-normal;
+        min-width: 140px;
+      }
     }
-   
-    .details {
+ 
+    .secondaryInfo {
       display: flex;
       gap: $spacing-unit;
       align-items: center;
-      
+ 
       .customer {
-        font-weight: $font-weight-bold;
         color: $text-primary;
+        font-weight: $font-weight-normal;
+        min-width: 100px;
       }
-      
-      .product {
-        color: $text-secondary;
-      }
-      
-      .amount {
-        color: $pink-dark;
-        font-weight: $font-weight-bold;
-      }
-   
+ 
       .date {
         color: $text-secondary;
         font-size: $font-size-small;
       }
     }
-   
-    .actions {
+  }
+ 
+  .actions {
+    display: flex;
+    gap: $spacing-unit;
+ 
+    button {
+      padding: $spacing-unit * 0.6;
+      border-radius: $border-radius;
+      transition: all $transition-duration;
       display: flex;
-      gap: $spacing-unit * 0.5;
-      
-      button {
-        padding: 0.5rem;
-        border-radius: $border-radius;
-        transition: all $transition-duration;
-        
-        &.edit {
-          color: $text-secondary;
-          &:hover {
-            background-color: $gray-light;
-          }
+      align-items: center;
+      justify-content: center;
+ 
+      &.edit {
+        color: $text-secondary;
+        &:hover {
+          background-color: $gray-light;
+          color: $text-primary;
         }
-        
-        &.delete {
-          color: #ef4444;
-          &:hover {
-            background-color: #fee2e2;
-          }
+      }
+ 
+      &.delete {
+        color: #ef4444;
+        &:hover {
+          background-color: #fee2e2;
         }
       }
     }
-   }
+  }
+ 
+  // סטיילינג להוצאות והכנסות
+  &.expense .amount {
+    color: #ef4444;
+  }
+ 
+  &.income .amount {
+    color: #10b981;
+  }
+ }
+ 
+ @media (max-width: 768px) {
+  .item {
+    padding: $spacing-unit;
+ 
+    .details {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-unit;
+ 
+      .mainInfo {
+        width: 100%;
+        justify-content: space-between;
+        
+        .amount, .product {
+          min-width: auto;
+        }
+      }
+ 
+      .secondaryInfo {
+        width: 100%;
+        justify-content: space-between;
+        
+        .customer {
+          min-width: auto;
+        }
+      }
+    }
+  }
+ }
+ 
+ @media (max-width: 480px) {
+  .item {
+    .details {
+      gap: $spacing-unit * 0.75;
+    }
+ 
+    .actions {
+      margin-top: $spacing-unit * 0.5;
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+ }
