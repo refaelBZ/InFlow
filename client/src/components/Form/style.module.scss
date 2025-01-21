@@ -3,6 +3,7 @@
 
 .formContainer {
   padding: $spacing-unit * 1.5;
+  width: 100%;
   
   .formTitle {
     font-size: 1.25rem;
@@ -16,6 +17,7 @@
     margin-bottom: $spacing-unit * 1.5;
     display: flex;
     justify-content: center;
+    width: 100%;
 
     .switcher {
       position: relative;
@@ -106,12 +108,8 @@
     }
 
     button {
-      width: 100%;
-      padding: 0.5rem 1rem;
-      background-color: $pink-light;
-      color: $pink-dark;
-      border-radius: $border-radius;
-      transition: all $transition-duration ease;
+      @include button-style;
+
 
       &:hover {
         background-color: rgba($pink-light, 0.8); // שיניתי את זה מ-color.adjust
@@ -147,13 +145,11 @@
       input, 
       select, 
       button {
-        padding: 0.875rem;
         font-size: 16px;
-        height: 3rem;
       }
 
       button {
-        height: 3.25rem;
+       @include button-style;
       }
     }
   }
