@@ -47,6 +47,19 @@ $shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   justify-content: center;
 }
 
+@mixin button-style{
+  padding: 0.5rem 1.5rem;
+  background-color: #fce7f3;
+  min-width: 80px;
+  color: #be185d;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  &:hover {
+    background-color: rgba($pink-light, 0.8);
+  }
+}
+
 @mixin flex-between {
   display: flex;
   align-items: center;

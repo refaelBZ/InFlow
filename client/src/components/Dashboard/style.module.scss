@@ -17,6 +17,9 @@ $mobile-padding: $spacing-unit * 0.75;
 
 .dashboardContainer {
   padding: $spacing-unit * 1.5;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   
   .statsGrid {
     display: grid;
@@ -81,9 +84,8 @@ $mobile-padding: $spacing-unit * 0.75;
       
       .dateGroup {
         @include flex-column;
-        width: 100%;
         gap: $spacing-unit;
-        align-items: stretch;
+        align-items: center;
 
         .dateControl {
           width: 100%;
