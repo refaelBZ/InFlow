@@ -13,7 +13,7 @@
       height: 100vh;
 
       .navigation {
-        order: 1; // סדר ברירת מחדל בדסקטופ
+        order: 1;
       }
 
       .sidebar {
@@ -46,17 +46,17 @@
         min-height: auto;
 
         .navigation {
-          order: 1; // הדר יופיע ראשון
+          order: 1;
         }
 
         .sidebar {
-          order: 2; // טופס יופיע שני
+          order: 2;
           width: 100%;
           height: auto;
         }
 
         .mainContent {
-          order: 3; // תוכן יופיע אחרון
+          order: 3;
           width: 100%;
           margin-bottom: 0;
         }
